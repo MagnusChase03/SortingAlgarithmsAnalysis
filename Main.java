@@ -188,6 +188,32 @@ public class Main extends JFrame {
                     numMovements.setValue((Object) Integer.valueOf(insertionSort.getMovements()));
                     timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
 
+                } else if (mergeSortRadio.isSelected()) {
+
+                    MergeSort mergeSort = new MergeSort();
+
+                    // Time sort
+                    long start = System.currentTimeMillis();
+                    mergeSort.mergeSort(sortingArray);
+                    long end = System.currentTimeMillis();
+
+                    numComparions.setValue((Object) Integer.valueOf(mergeSort.getComparisons()));
+                    numMovements.setValue((Object) Integer.valueOf(mergeSort.getMovements()));
+                    timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
+
+                } else if (quickSortRadio.isSelected()) {
+
+                    QuickSort quickSort = new QuickSort();
+
+                    // Time sort
+                    long start = System.currentTimeMillis();
+                    quickSort.quickSort(sortingArray);
+                    long end = System.currentTimeMillis();
+
+                    numComparions.setValue((Object) Integer.valueOf(quickSort.getComparisons()));
+                    numMovements.setValue((Object) Integer.valueOf(quickSort.getMovements()));
+                    timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
+
                 }
 
             }
