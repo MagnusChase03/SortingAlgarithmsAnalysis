@@ -1,7 +1,4 @@
-all: compile run
+all: compile
 
 compile:
-	javac *.java
-
-run:
-	java Main
+	javac *.java -d bin
