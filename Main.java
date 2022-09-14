@@ -54,33 +54,44 @@ public class Main extends JFrame {
         panel.add(quickSortRadio);
         panel.add(radixSortRadio);
 
+        // Array properties
+        ButtonGroup arrayPropRadio = new ButtonGroup();
+
+        JRadioButton inOrderRadio = new JRadioButton("In Order");
+        inOrderRadio.setBounds(10, 80, 120, 25);
+        inOrderRadio.setBackground(new Color(251, 250, 245));
+
+        JRadioButton reverseOrderRadio = new JRadioButton("Reverse Order");
+        reverseOrderRadio.setBounds(140, 80, 120, 25);
+        reverseOrderRadio.setBackground(new Color(251, 250, 245));
+
+        JRadioButton almostOrderRadio = new JRadioButton("Almost Order");
+        almostOrderRadio.setBounds(270, 80, 120, 25);
+        almostOrderRadio.setBackground(new Color(251, 250, 245));
+
+        JRadioButton randomOrderRadio = new JRadioButton("Random Order");
+        randomOrderRadio.setBounds(400, 80, 120, 25);
+        randomOrderRadio.setBackground(new Color(251, 250, 245));
+
+        arrayPropRadio.add(inOrderRadio);
+        arrayPropRadio.add(reverseOrderRadio);
+        arrayPropRadio.add(almostOrderRadio);
+        arrayPropRadio.add(randomOrderRadio);
+
+        panel.add(inOrderRadio);
+        panel.add(reverseOrderRadio);
+        panel.add(almostOrderRadio);
+        panel.add(randomOrderRadio);
+
         // Sort options
         JLabel numElementsLabel = new JLabel("Number of elements:");
-        numElementsLabel.setBounds(10, 80, 120, 25);
+        numElementsLabel.setBounds(10, 115, 120, 25);
         numElementsLabel.setBackground(new Color(251, 250, 245));
         panel.add(numElementsLabel);
 
         JSpinner numElements = new JSpinner();
-        numElements.setBounds(140, 80, 120, 25);
+        numElements.setBounds(140, 115, 120, 25);
         panel.add(numElements);
-
-        // Run button
-        JButton sort = new JButton("Sort");
-        sort.setBounds(10, 115, 120, 25);
-
-        sort.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-
-                // if (selectionSortRadio.isSelected()) {}
-
-                System.out.println("Sorting...");
-
-            }
-
-        });
-
-        panel.add(sort);
 
         // Stats
         JLabel comparionsLabel = new JLabel("Number of comparions:");
@@ -90,6 +101,7 @@ public class Main extends JFrame {
 
         JSpinner numComparions = new JSpinner();
         numComparions.setBounds(140, 200, 120, 25);
+        numComparions.setEnabled(false);
         panel.add(numComparions);
 
         JLabel movementsLabel = new JLabel("Number of movements:");
@@ -99,6 +111,7 @@ public class Main extends JFrame {
 
         JSpinner numMovements = new JSpinner();
         numMovements.setBounds(400, 200, 120, 25);
+        numMovements.setEnabled(false);
         panel.add(numMovements);
 
         JLabel timeLabel = new JLabel("Time taken (ms):");
@@ -108,7 +121,80 @@ public class Main extends JFrame {
 
         JSpinner timeTaken = new JSpinner();
         timeTaken.setBounds(140, 235, 120, 25);
+        timeTaken.setEnabled(false);
         panel.add(timeTaken);
+
+        // Run button
+        JButton sort = new JButton("Sort");
+        sort.setBounds(10, 150, 120, 25);
+
+        sort.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+
+                // Create array specified
+                int size = ((Integer) numElements.getValue()).intValue();
+                int[] sortingArray = new int[size];
+                if (inOrderRadio.isSelected()) {
+
+                    for (int i = 0; i < size; i++) {
+
+                        sortingArray[i] = i;
+
+                    }
+
+                } else if (reverseOrderRadio.isSelected()) {
+
+                    for (int i = 0; i < size; i++) {
+
+                        sortingArray[size - i - 1] = i;
+
+                    }
+
+                } else if (randomOrderRadio.isSelected()) {
+
+                    for (int i = 0; i < size; i++) {
+
+                        sortingArray[i] = (int) (Math.random() * size);
+
+                    }
+
+                }
+
+                // Sort the array
+                if (selectionSortRadio.isSelected()) {
+
+                    SelectionSort selectionSort = new SelectionSort();
+
+                    // Time sort
+                    long start = System.currentTimeMillis();
+                    selectionSort.selectionSort(sortingArray);
+                    long end = System.currentTimeMillis();
+
+                    numComparions.setValue((Object) Integer.valueOf(selectionSort.getComparisons()));
+                    numMovements.setValue((Object) Integer.valueOf(selectionSort.getMovements()));
+                    timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
+
+                } else if (insertionSortRadio.isSelected()) {
+
+                    InsertionSort insertionSort = new InsertionSort();
+
+                    // Time sort
+                    long start = System.currentTimeMillis();
+                    insertionSort.insertionSort(sortingArray);
+                    long end = System.currentTimeMillis();
+
+                    numComparions.setValue((Object) Integer.valueOf(insertionSort.getComparisons()));
+                    numMovements.setValue((Object) Integer.valueOf(insertionSort.getMovements()));
+                    timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
+
+                }
+
+            }
+
+        });
+
+        panel.add(sort);
 
     }
 
