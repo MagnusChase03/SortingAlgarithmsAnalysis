@@ -8,7 +8,7 @@ public class QuickSort {
 	}
 	
 	public void quickSort(int[] list, int first, int last) {
-		comparions += 1;
+		
 		if (last > first) {
 			int pivotIndex = partition(list, first, last);
 			quickSort(list, first, pivotIndex -1);
@@ -22,9 +22,8 @@ public class QuickSort {
 		int low = first + 1; // Index for forward search
 		int high = last; //Index for backward search
 		
-		comparions += 1;
 		while (high > low) {
-			comparions += 3;
+			comparions += 2;
 			// Search forward from left
 			while (low <= high && list[low] <= pivot) {
 
@@ -42,7 +41,6 @@ public class QuickSort {
 			}
 			
 			//	Swap two elements in the list
-			comparions += 1;
 			if (high > low) {
 				int temp = list[high];
 				list[high] = list[low];

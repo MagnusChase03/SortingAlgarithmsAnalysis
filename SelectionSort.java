@@ -22,7 +22,6 @@ public class SelectionSort {
 			}
 			
 			//	Swap list[i] wiht list[currentMinIndex[ if necessary
-            comparions += 1;
 			if (currentMinIndex != i) {
 
                 movements += 1;

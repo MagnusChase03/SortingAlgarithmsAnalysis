@@ -5,6 +5,8 @@ import java.awt.event.*;
 public class Main extends JFrame {
 
     // TODO: Make seperate function, constants for colors and other needed optimization and cleanliness
+    // TODO: FIX COMPARISONS AND MOVEMENTS FOR CERTAIN ALGARITHMS
+
     // Creating interface wich holds buttons and functionallity
     private void createInterface() {
 
@@ -214,6 +216,40 @@ public class Main extends JFrame {
                     numMovements.setValue((Object) Integer.valueOf(quickSort.getMovements()));
                     timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
 
+                } else if (radixSortRadio.isSelected()) {
+
+                    RadixSort radixSort = new RadixSort();
+
+                    // Time sort
+                    long start = System.currentTimeMillis();
+                    radixSort.radixsort(sortingArray, size);
+                    long end = System.currentTimeMillis();
+
+                    numComparions.setValue((Object) Integer.valueOf(radixSort.getComparisons()));
+                    numMovements.setValue((Object) Integer.valueOf(radixSort.getMovements()));
+                    timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
+
+                } else if (heapSortRadio.isSelected()) {
+
+                    HeapSort<Integer> heapSort = new HeapSort<>();
+
+                    // Recreate array
+                    Integer[] sortingArrayInteger = new Integer[size];
+                    for (int j = 0; j < size; j++) {
+
+                        sortingArrayInteger[j] = Integer.valueOf(sortingArray[j]);
+
+                    }
+
+                    // Time sort
+                    long start = System.currentTimeMillis();
+                    heapSort.heapSort(sortingArrayInteger);
+                    long end = System.currentTimeMillis();
+
+                    numComparions.setValue((Object) Integer.valueOf(heapSort.getComparisons()));
+                    numMovements.setValue((Object) Integer.valueOf(heapSort.getMovements()));
+                    timeTaken.setValue((Object) Integer.valueOf((int) (end - start)));
+
                 }
 
             }
@@ -227,7 +263,7 @@ public class Main extends JFrame {
     public Main() {
 
         // Create window properties
-        setTitle("Sorting Algarithm Anylisis");
+        setTitle("Sorting Algarithm Analysis");
         setSize(600, 800);
         setResizable(false);
         setLocationRelativeTo(null);

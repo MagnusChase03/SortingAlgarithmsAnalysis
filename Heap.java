@@ -1,6 +1,9 @@
 
 public class Heap<E extends Comparable<E>> {
 	private java.util.ArrayList<E> list = new java.util.ArrayList<>();
+
+    private int comparions;
+    private int movements;
 	
 	/** Create a default heap */
 	public Heap() {
@@ -20,8 +23,10 @@ public class Heap<E extends Comparable<E>> {
 		while (currentIndex > 0) {
 			int parentIndex = (currentIndex -1)/2;
 			//	Swap if the current object is greater than its parent
+            comparions += 1;
 			if (list.get(currentIndex).compareTo(
 					list.get(parentIndex)) > 0) {
+                movements += 1;
 				E temp = list.get(currentIndex);
 				list.set(currentIndex, list.get(parentIndex));
 				list.set(parentIndex, temp);
@@ -58,8 +63,10 @@ public class Heap<E extends Comparable<E>> {
 			}
 			
 			//	Swap if the current node is less than the maximum
+            comparions += 1;
 			if (list.get(currentIndex).compareTo( 
 					list.get(maxIndex)) < 0) {
+                movements += 1;
 				E temp = list.get(maxIndex);
 				list.set(maxIndex, list.get(currentIndex));
 				list.set(currentIndex, temp);
@@ -76,4 +83,16 @@ public class Heap<E extends Comparable<E>> {
 	public int getSize() {
 		return list.size();
 	}
+
+    public int getComparisons() {
+
+        return comparions;
+
+    }
+
+    public int getMovements() {
+
+        return movements;
+
+    }
 }
