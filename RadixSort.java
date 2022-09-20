@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.*;
 
 class RadixSort {
@@ -31,6 +30,7 @@ class RadixSort {
             count[i] += count[i - 1];
 
         for (i = arr_len - 1; i >= 0; i--) {
+            movements += 1;
             result[count[(my_arr[i] / exp) % 10] - 1] = my_arr[i];
             count[(my_arr[i] / exp) % 10]--;
         }

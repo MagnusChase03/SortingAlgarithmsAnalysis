@@ -153,6 +153,22 @@ public class Main extends JFrame {
 
                     }
 
+                } else if (almostOrderRadio.isSelected()) {
+
+                    int partition = (int) (size * .8);
+                    for (int i = 0; i < partition; i++) {
+
+                        sortingArray[i] = i;
+
+                    }
+
+                    for (int i = partition; i < size; i++) {
+
+                        sortingArray[i] = (int) (Math.random() * size);
+
+                    }
+
+
                 } else if (randomOrderRadio.isSelected()) {
 
                     for (int i = 0; i < size; i++) {
@@ -161,7 +177,7 @@ public class Main extends JFrame {
 
                     }
 
-                }
+                } 
 
                 // Sort the array
                 if (selectionSortRadio.isSelected()) {
@@ -264,7 +280,7 @@ public class Main extends JFrame {
 
         // Create window properties
         setTitle("Sorting Algarithm Analysis");
-        setSize(600, 800);
+        setSize(600, 310);
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
